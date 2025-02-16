@@ -14,7 +14,7 @@ function Tabs (props){
         )}
       </TabButtonContainer>
       {props.tabs.map((tab) => 
-        <TabContent key={tab.id} $isActive={activeTab===tab.id} onClick={()=>updateTab(tab.id)}>
+        <TabContent key={tab.id} $isActive={activeTab===tab.id}>
           {tab.content}
         </TabContent>
       )}

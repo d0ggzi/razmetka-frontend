@@ -3,12 +3,14 @@ import {useState} from "react";
 import {useAuth} from "../../../context/useAuth.jsx";
 import DropdownList from "../../blocks/dropdownlist/dropdownList.jsx";
 import {StyledList} from "../../blocks/dropdownlist/styles.js";
+import {useNavigate} from "react-router-dom";
 
 function Nav({setSelectedProject}) {
     const [sidebar, setSidebar] = useState(true);
     const {user, hasRole} = useAuth();
 
     const showSidebar = () => setSidebar(!sidebar);
+    const navigate = useNavigate();
 
     return (
         <>
@@ -25,8 +27,8 @@ function Nav({setSelectedProject}) {
                     ]}
                     onSelect={setSelectedProject}
                 />
-                {hasRole(["admin"]) && <StyledList>Все проекты</StyledList>}
-                {hasRole(["admin"]) && <StyledList>Все пакеты</StyledList>}
+                {hasRole(["admin"]) && <StyledList onClick={() => navigate("/project")}>Все проекты</StyledList>}
+                {hasRole(["admin"]) && <StyledList onClick={() => navigate("/batch")}>Все пакеты</StyledList>}
                 {hasRole(["admin"]) && <StyledList>Асессоры</StyledList>}
             </SideBar>
         </>

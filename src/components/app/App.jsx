@@ -7,6 +7,8 @@ import MainPage from "../pages/main-page/main-page.jsx";
 import PageWrapper from "../layout/page-wrapper/page-wrapper.jsx";
 import {GlobalStyle} from "./styles.js";
 import Modal from "../layout/modal/modal.jsx";
+import BatchPage from "../pages/batch-page/batch-page.jsx";
+import ProjectPage from "../pages/project-page/project-page.jsx";
 
 function App() {
   const [modalActive, setModalActive] = useState(false);
@@ -29,6 +31,8 @@ function App() {
               <ProfilePage/>
             </ProtectedRoute>
           }/>
+          <Route path='batch' element={<BatchPage/>}/>
+          <Route path='project' element={<ProjectPage/>}/>
           {/*<Route path='*' element={<NotFoundPage/>}/>*/}
         </Route>
       </Routes>
