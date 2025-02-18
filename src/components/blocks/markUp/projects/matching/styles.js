@@ -9,7 +9,7 @@ export const StyledImage = styled.img`
 
 export const StyledLink = styled.a`
     display: block;
-    color: #007bff;
+    color: ${(props)=> props.theme.buttonColor};
     text-decoration: none;
     margin-top: 10px;
     &:hover {
@@ -18,7 +18,7 @@ export const StyledLink = styled.a`
 `;
 
 export const StyledButton = styled.button`
-    background: #007bff;
+    background: ${(props)=> props.theme.buttonColor};
     color: white;
     border: none;
     padding: 10px 15px;

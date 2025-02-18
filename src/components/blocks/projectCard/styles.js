@@ -21,3 +21,19 @@ export const Text = styled.p`
     color: #555;
 `;
 
+export const SelectButton = styled.button`
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    font-size: 1em;
+    text-align: center;
+
+    &:hover {
+        background-color: #0056b3;
+    }
+`;

@@ -3,51 +3,63 @@ import styled from "styled-components";
 export const Form = styled.form`
     display: flex;
     flex-direction: column;
-    justify-content: center;
-`
+    align-items: center;
+    gap: 15px;
+`;
 
 export const FormContainer = styled.div`
     display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-`
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+`;
 
 export const TextInput = styled.textarea`
     box-sizing: border-box;
-    width: 600px;
-    min-height: 300px;
-    max-height: 600px;
+    width: 350px;
+    height: 100px;
     padding: 8px 16px;
     font-size: 14px;
     border-radius: 4px;
-    border: 1px solid ${(props) => props.theme.unactiveTabColor};
-    margin-bottom: 16px;
+    border: 1px solid ${(props)=> props.theme.buttonColor};
+    margin-top: 10px;
     resize: vertical;
-    overflow: auto;
-    white-space: pre-wrap;
+`;
+
+export const Select = styled.select`
+    width: 350px;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid ${(props)=> props.theme.buttonColor};
+    background-color: #ffffff;
+    cursor: pointer;
 `;
 
 export const SubmitButton = styled.input`
-    width: 350px;
-    height: 35px;
-    margin: 0 auto;
-    text-align: center;
-    border: none;
-    margin-bottom: 20px;
+    height: 40px;
     border-radius: 4px;
-    background-color: #285FCB;
-    color: ${(props) => props.theme.colorWhite};
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    background-color: ${(props)=> props.theme.buttonColor};
+    color: #ffffff;
     cursor: pointer;
+    padding: 10px 15px;
+
+    &:hover {
+        background: #12776c;
+    }
 
     &:disabled {
-        background-color: #ABB5BE;
-        color: #54595E;
-        cursor: auto;
+        background: #ccc;
+        cursor: not-allowed;
     }
-`
+`;
 
-export const InfoCreateStatus = styled.span`
-    display: block;
-    margin: 0 auto;
-    font-size: 12px;
-`
+export const InfoCreateStatus = styled.p`
+    font-size: 14px;
+    color: ${(props) => (props.success ? "red" : "green")};
+    font-weight: bold;
+    margin-top: 10px;
+`;

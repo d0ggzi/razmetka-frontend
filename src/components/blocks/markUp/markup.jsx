@@ -5,13 +5,13 @@ function Markup({selectedProjectName, selectedProjectId}) {
     return (
         <div>
             {(() => {
-                if (selectedProjectName === "Search") {
+                if (selectedProjectName.toLowerCase() === "search") {
                     return (
                         <ProjectSearch
                             projectId={selectedProjectId}
                         />
                     )
-                } else if (selectedProjectName === "Matching") {
+                } else if (selectedProjectName.toLowerCase() === "matching") {
                     return (
                         <ProjectMatching
                             projectId={selectedProjectId}

@@ -13,7 +13,7 @@ function MainPage(props) {
         {
             id: 2,
             name: 'Ошибки',
-            content: <Profile/>,
+            content: <p>Тут будут ошибки</p>,
         }
     ]
     return (

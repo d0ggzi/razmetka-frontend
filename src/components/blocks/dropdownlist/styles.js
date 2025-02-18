@@ -8,7 +8,7 @@ export const StyledList = styled.ul`
         height: 24px;
         position: absolute;
         background-image: url(${(props) =>
-            props.$isOpen ? "../../../../public/assets/arrow-up.png" : "../../../../public/assets/arrow.svg"});
+            props.$isOpen ? "/assets/arrow-up.png" : "/assets/arrow.svg"});
         background-repeat: no-repeat;
         left: -15px;
         top: 3px;

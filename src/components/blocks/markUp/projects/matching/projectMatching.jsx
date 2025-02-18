@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import {
     Container,
     Sidebar,
@@ -13,6 +13,7 @@ import {
     StyledCheckbox,
     StyledRadio
 } from "./styles";
+import {UserContext} from "../../../../../context/user-context.jsx";
 
 function ProjectMatching({projectId}) {
     const storageKeyTask = `task_matching_${projectId}`;
@@ -23,8 +24,19 @@ function ProjectMatching({projectId}) {
     const [selectedRadio, setSelectedRadio] = useState("");
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [noTasks, setNoTasks] = useState(false);
+    const [token, setToken] = useContext(UserContext);
+
 
     const fetchTaskData = async (forceUpdate = false) => {
+        const requestOptions = {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        };
+
         try {
             const storedTask = localStorage.getItem(storageKeyTask);
             const storedLabels = localStorage.getItem(storageKeyLabels);
@@ -34,17 +46,26 @@ function ProjectMatching({projectId}) {
                 setLabels(JSON.parse(storedLabels));
                 setLoading(false);
             } else {
-                const taskRes = await fetch(`http://localhost:8080/api/v1/task?task_type_id=${projectId}`);
+                const taskRes = await fetch(`/api/v1/task?project=${projectId}`, requestOptions);
+
+                if (taskRes.status === 204) {
+                    setNoTasks(true);
+                    setTask(null);
+                    setLoading(false);
+                    return;
+                }
+
                 const taskData = await taskRes.json();
 
-                const labelsRes = await fetch(`http://localhost:8080/api/v1/task-type/${projectId}`);
+                const labelsRes = await fetch(`/api/v1/task-type/${projectId}`, requestOptions);
                 const labelsData = await labelsRes.json();
 
                 setTask(taskData);
                 setLabels(labelsData.annotation_metadata);
+                setNoTasks(false);
 
-                localStorage.setItem(`task_${projectId}`, JSON.stringify(taskData));
-                localStorage.setItem(`labels_${projectId}`, JSON.stringify(labelsData.annotation_metadata));
+                localStorage.setItem(storageKeyTask, JSON.stringify(taskData));
+                localStorage.setItem(storageKeyLabels, JSON.stringify(labelsData.annotation_metadata));
 
                 setSelectedRadio("");
                 setSelectedCheckboxes([]);
@@ -52,6 +73,7 @@ function ProjectMatching({projectId}) {
             }
         } catch (error) {
             console.error("Ошибка загрузки данных:", error);
+            setNoTasks(true);
             setLoading(false);
         }
     };
@@ -81,10 +103,11 @@ function ProjectMatching({projectId}) {
         };
 
         try {
-            const response = await fetch("http://localhost:8080/api/v1/answer", {
+            const response = await fetch("/api/v1/answer", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(payload),
             });
@@ -100,7 +123,7 @@ function ProjectMatching({projectId}) {
     };
 
     if (loading) return <p>Загрузка...</p>;
-    if (!task) return <p>Задание не найдено</p>;
+    if (noTasks) return <p>Нет доступных задач для данного проекта</p>;
 
     return (
         <Container>

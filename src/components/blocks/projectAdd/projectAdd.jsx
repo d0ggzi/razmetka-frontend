@@ -23,7 +23,7 @@ const ProjectAdd = () => {
                 annotation_metadata: newProjectMetadata.length!==0 ? JSON.parse(newProjectMetadata) : null
             }),
         };
-        const response = await fetch("http://localhost:8080/api/v1/task-type", requestOptions);
+        const response = await fetch("/api/v1/task-type", requestOptions);
         const data = await response.json();
 
         if (!response.ok) {

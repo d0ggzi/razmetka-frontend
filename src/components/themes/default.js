@@ -7,6 +7,7 @@ export const defaultTheme = {
     mainBackgroundColor: '#E9ECEF',
     activeTabColor: '#DEE2E6',
     unactiveTabColor: '#CED4DA',
+    buttonColor: '#007bff',
     fontFamily: '"Involve", "Arial", sans-serif',
     fontSizeDefault: "16px",
     pageWidth: "1400px",

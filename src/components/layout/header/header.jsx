@@ -8,10 +8,11 @@ import Nav from "../nav/nav.jsx";
 function Header({setSelectedProjectName, setSelectedProjectId}) {
   const [token] = useContext(UserContext);
   return (
-    <StyledHeader>
-      {token && <Nav setSelectedProjectName={setSelectedProjectName} setSelectedProjectId={setSelectedProjectId}></Nav>}
+      <StyledHeader>
+        {token &&
+            <Nav setSelectedProjectName={setSelectedProjectName} setSelectedProjectId={setSelectedProjectId}></Nav>}
         {token && <Avatar/>}
-    </StyledHeader>
+      </StyledHeader>
   )
 }
 

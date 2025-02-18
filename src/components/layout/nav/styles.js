@@ -7,7 +7,7 @@ export const StyledBurger = styled.button`
     margin-right: 16px;
     background-color: transparent;
     cursor: pointer;
-    background-image: url('../../../../public/assets/burger.svg');
+    background-image: url('/assets/burger.svg');
 `
 
 export const SideBar = styled.nav`
@@ -38,5 +38,5 @@ export const CloseButton = styled.button`
     border: none;
     background-color: transparent;
     cursor: pointer;
-    background-image: url('../../../../public/assets/closeButton.svg');
+    background-image: url('/assets/closeButton.svg');
 `
