@@ -8,19 +8,19 @@ const BatchAdd = () => {
     const [infoCreateStatus, setInfoCreateStatus] = useState("");
 
     async function createBatch() {
+        console.log(JSON.stringify(JSON.parse(newBatch)));
         const requestOptions = {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(newBatch),
+            body: JSON.stringify(JSON.parse(newBatch)),
         };
         const response = await fetch("http://localhost:8080/api/v1/batch", requestOptions);
-        const data = await response.json();
 
         if (!response.ok) {
-            setInfoCreateStatus(data.detail);
+            setInfoCreateStatus('Произошла ошибка, перепроверьте данные');
         } else {
             setInfoCreateStatus('Пакет успешно добавлен!');
         }

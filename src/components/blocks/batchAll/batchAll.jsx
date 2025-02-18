@@ -3,10 +3,11 @@ import {UserContext} from "../../../context/user-context";
 import Table from "../table/table.jsx";
 
 const tableHead = {
-    batch_name: "Имя пакета",
+    name: "Имя пакета",
     owner: "Владелец",
     task_type: "Проект",
     is_educational: "Образовательный",
+    created_at: "Дата создания"
 };
 
 const BatchAll = () => {
@@ -61,7 +62,7 @@ const BatchAll = () => {
                     "Content-Type": "application/json",
                 },
             };
-            const response = await fetch(`http://localhost:8080/api/v1/batch?page_number=${page+1}&page_size=${countPerPage}`, requestOptions);
+            const response = await fetch(`http://localhost:8080/api/v1/batch?page=${page}&size=${countPerPage}`, requestOptions);
             const result = await response.json();
 
             if (response.ok) {

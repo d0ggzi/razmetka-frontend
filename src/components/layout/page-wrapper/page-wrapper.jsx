@@ -2,10 +2,10 @@ import Header from "../header/header";
 import { StyledPageWrapper } from "./styles";
 import { Outlet } from "react-router-dom";
 
-function PageWrapper ({ setSelectedProject }){
+function PageWrapper ({ setSelectedProjectName, setSelectedProjectId }){
   return (
     <>
-      <Header setSelectedProject={setSelectedProject}/>
+      <Header setSelectedProjectName={setSelectedProjectName} setSelectedProjectId={setSelectedProjectId}/>
       <StyledPageWrapper>
         <Outlet/>
       </StyledPageWrapper>

@@ -5,12 +5,18 @@ import DropdownList from "../../blocks/dropdownlist/dropdownList.jsx";
 import {StyledList} from "../../blocks/dropdownlist/styles.js";
 import {useNavigate} from "react-router-dom";
 
-function Nav({setSelectedProject}) {
+function Nav({setSelectedProjectName, setSelectedProjectId}) {
     const [sidebar, setSidebar] = useState(true);
     const {user, hasRole} = useAuth();
 
     const showSidebar = () => setSidebar(!sidebar);
     const navigate = useNavigate();
+
+    function onSelectProjectItem ( itemLabel, itemId ) {
+        setSelectedProjectName(itemLabel);
+        setSelectedProjectId(itemId);
+        navigate("/");
+    }
 
     return (
         <>
@@ -22,12 +28,12 @@ function Nav({setSelectedProject}) {
                 <DropdownList
                     title="Мои проекты"
                     items={[
-                        {label: "Проект A"},
-                        {label: "Проект Б"}
+                        {name: "Search", task_type_id: "123"},
+                        {name: "Matching", task_type_id: "321"}
                     ]}
-                    onSelect={setSelectedProject}
+                    onSelect={onSelectProjectItem}
                 />
-                {hasRole(["admin"]) && <StyledList onClick={() => navigate("/project")}>Все проекты</StyledList>}
+                {<StyledList onClick={() => navigate("/project")}>Все проекты</StyledList>}
                 {hasRole(["admin"]) && <StyledList onClick={() => navigate("/batch")}>Все пакеты</StyledList>}
                 {hasRole(["admin"]) && <StyledList>Асессоры</StyledList>}
             </SideBar>

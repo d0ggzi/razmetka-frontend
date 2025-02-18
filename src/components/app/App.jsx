@@ -13,16 +13,17 @@ import ProjectPage from "../pages/project-page/project-page.jsx";
 function App() {
   const [modalActive, setModalActive] = useState(false);
   const [modalContent, setModalContent] = useState('');
-  const [selectedProject, setSelectedProject] = useState('');
+  const [selectedProjectName, setSelectedProjectName] = useState('');
+  const [selectedProjectId, setSelectedProjectId] = useState('');
 
   return (
     <>
       <GlobalStyle/>
       <Routes>
-        <Route path='/' element={<PageWrapper setSelectedProject={setSelectedProject}></PageWrapper>}>
+        <Route path='/' element={<PageWrapper setSelectedProjectName={setSelectedProjectName} setSelectedProjectId={setSelectedProjectId}></PageWrapper>}>
           <Route index element={
             <ProtectedRoute>
-              <MainPage setModalActive={setModalActive} setModalContent={setModalContent} selectedProject={selectedProject}/>
+              <MainPage setModalActive={setModalActive} setModalContent={setModalContent} selectedProjectName={selectedProjectName} selectedProjectId={selectedProjectId}/>
             </ProtectedRoute>
           }/>
           <Route path='login' element={<LoginPage/>}/>
@@ -31,8 +32,16 @@ function App() {
               <ProfilePage/>
             </ProtectedRoute>
           }/>
-          <Route path='batch' element={<BatchPage/>}/>
-          <Route path='project' element={<ProjectPage/>}/>
+          <Route path='batch' element={
+            <ProtectedRoute requiredRoles={["customer", "expert", "admin"]}>
+              <BatchPage/>
+            </ProtectedRoute>
+          }/>
+          <Route path='project' element={
+            <ProtectedRoute>
+              <ProjectPage/>
+            </ProtectedRoute>
+          }/>
           {/*<Route path='*' element={<NotFoundPage/>}/>*/}
         </Route>
       </Routes>
